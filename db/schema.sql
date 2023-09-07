@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS magnifi_db;
+CREATE DATABASE magnifi_db;
