@@ -8,9 +8,22 @@
 </head>
 
 <body>
-    <header>
-    <h1>Welcome to Magnifi</h1>
-    </header>
+    {{>header}}
 
+    <div class="container">
+        <div id="login">
+            <a href="/login" class="login-btn">Log in with Spotify</a>
+        </div>
+    </div>
+
+    <div class="body">
+        {{{body}}}
+    </div>
+
+    {{!-- {{#if loggedIn}}
+    <script src="/js/logout.js"></script>
+    {{/if}} --}}
+    {{>footer}}
 </body>
+
 </html>
