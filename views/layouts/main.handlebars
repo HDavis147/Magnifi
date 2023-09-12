@@ -5,24 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magnifi</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
     {{>header}}
-
-    <div class="container">
-        <div id="login">
-            <a href="/login" class="login-btn">Log in with Spotify</a>
-        </div>
-    </div>
-
     <div class="body">
         {{{body}}}
     </div>
-
     {{!-- {{#if loggedIn}}
     <script src="/js/logout.js"></script>
     {{/if}} --}}
+
     {{>footer}}
 </body>
 
