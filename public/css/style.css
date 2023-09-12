@@ -1,7 +1,7 @@
 
 h2{
     text-align: center;
-    font-size: 30px;
+    font-size: 200px;
     font-family: "Helvetica Neue", Helvetica, Geneva, Tahoma, sans-serif;
 }
 
@@ -21,9 +21,14 @@ h2{
   display: block;
   max-width: 300px;
 }
-
 .login-btn:hover
 {
     background-color: dimgrey;
     text-decoration: none;
+}
+.buttonContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
 }
