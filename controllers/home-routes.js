@@ -23,9 +23,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/login', async (req, res) => {
 
-});
 
 router.get('/collection/:id', async (req, res) => {
 
