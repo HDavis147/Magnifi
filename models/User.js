@@ -33,14 +33,25 @@ User.init(
             allowNull: false,
             validate: {
                 len: [8],
+
             },
         }
     },
     {
         hooks: {
             beforeCreate: async (newUserData) => {
-                newUserData.password = await bcrypt.hash(newUserData.password, 10);
-                return newUserData;
+                $.ajax({
+                    url: "https://api.spotify.com/v1/me",
+                    headers: {
+                      Authorization: "Bearer " + accessToken,
+                    },
+                    success: function (response) {
+                      // Do something with userdata
+                      newUserData.name = response.display_name;
+                      newUserData.email = response.email;
+                      newUserData.id = response.id;
+                    }});
+                    return newUserData;
             },
             beforeUpdate: async (updatedUserData) => {
                 updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
