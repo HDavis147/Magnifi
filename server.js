@@ -6,6 +6,7 @@ const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 
 const sequelize = require('./config/connection');
+const { request } = require('http');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
@@ -79,6 +80,14 @@ app.get('/callback', function(req, res) {
       },
       json: true
     };
+
+    request.post(authOptions, function(error, response, body) {
+      if (!error && response.statusCode === 200) {
+        accessToken = body.access_token;
+        var accessToken = body.access_token,
+        refreshToken = body.refresh_token;
+      }});
+
   }
 });
 // Example response from server
