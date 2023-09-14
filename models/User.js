@@ -8,7 +8,6 @@ class User extends Model {
     }
 };
 
-
 User.init(
     {
         id: {
@@ -50,6 +49,7 @@ User.init(
         },
         sequelize,
         timestamps: false,
+        freezeTableName: true,
         underscored:true,
         modelName: 'user'
     }

@@ -13,19 +13,11 @@ Comment.init(
        },
        comment_text: {
         type: DataTypes.STRING,
-        allowNull: false
        },
        user_id: {
         type: DataTypes.INTEGER,
         references: {
             model: 'user',
-            key: 'id'
-        },
-       },
-       playlist_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'playlist',
             key: 'id'
         },
        },
