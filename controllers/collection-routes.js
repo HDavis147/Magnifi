@@ -4,7 +4,25 @@ const { Playlist, Song, User, Comment } = require('../models');
 router.get('/', async (req, res) => {
     // I want it get the users playlist saved in our db
     // I want it to also ask at the bottom if they want to get a new listen result
+    try {
+        const playlistData = await Playlist.findAll({
+            include: [
+                {
+                    model: User,
+                    attributes: ['name']
+                }
+            ]
+        });
 
+        const playlists = playlistData.map((playlist) => playlist.get({ plain: true }));
+
+        res.render('browse', {
+            playlists,
+            loggedIn: req.session.loggedIn
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 router.post('/', async (req, res) => {
