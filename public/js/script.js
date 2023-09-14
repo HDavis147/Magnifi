@@ -1,4 +1,4 @@
-const submitBtn = document.querySelector();
+// const submitBtn = document.querySelector();
 // try this javascript fetch request
 async function getSongsInJavascript() {
 	const headers = { 'Authorization' : 'Bearer ' + accessToken }
