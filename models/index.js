@@ -1,14 +1,14 @@
 const User = require('./User');
-const Playlist = require('./Playlist');
+const Song = require('./Song');
 const Comment = require('./Comment');
 
-User.hasMany(Playlist, {
+User.hasMany(Song, {
     foreignKey: 'user_id',
+    onDelete: 'CASCADE'
 });
 
-Playlist.belongsTo(User, {
+Song.belongsTo(User, {
     foreignKey: 'user_id',
-    onDelete: 'SET NULL'
 });
 
 User.hasMany(Comment, {
@@ -20,13 +20,6 @@ Comment.belongsTo(User, {
     foreignKey: 'user_id'
 });
 
-Comment.belongsTo(Playlist, {
-    foreignKey: 'playlist_id'
-});
-
-Playlist.hasMany(Comment, {
-    foreignKey: 'playlist_id'
-});
 
 
-module.exports = { User, Playlist, Comment };
+module.exports = { User, Song, Comment };

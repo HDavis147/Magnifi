@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const { Playlist, Comment } = require('../../models');
+const { Song, Comment } = require('../../models');
 
 router.get('/', async (req, res) => {
     try {
-        const playlistData = await Playlist.findAll({
+        const playlistData = await Song.findAll({
             order: [['date_created']],
         });
         res.status(200).json(playlistData);
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const playlistData = await Playlist.findByPk(req.params.id)
+        const playlistData = await Song.findByPk(req.params.id)
 
         if(!playlistData) {
             res.status(400).json({ message: 'awkard silence... playlist could not be found' })
@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     console.log(req)
     try {
-        const playlistData = await Playlist.bulkCreate([
+        const playlistData = await Song.bulkCreate([
             {
                 song_name: req.body,
                 artist_name: req.body
@@ -43,11 +43,11 @@ router.post('/', async (req, res) => {
 
 router.post('/:id/comments', async (req, res) => {
     try {
-        const { playlistId } = req.params;
+        const { songId } = req.params;
     
-        const playlist = await Playlist.findByPk(playlistId);
+        const song = await Song.findByPk(songId);
     
-        if (!playlist) {
+        if (!song) {
           return res.status(404).json({ error: 'Playlist not found' });
         }
     
