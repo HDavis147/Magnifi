@@ -42,18 +42,20 @@ const clientID = process.env.clientID;
 const clientSecret = process.env.clientSecret;
 const redirectURI = process.env.redirectURI;
 
+function generateRandomString(length) {
+  let text = '';
+  let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (let i = 0; i < length; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+};
+
 app.get('/login', function(req, res) {
   var state = generateRandomString(16);
-  var scope = 'user-read-private user-read-email';
+  var scope = 'user-read-private%20user-read-email';
 
-  res.redirect('https://accounts.spotify.com/authorize?' +
-    querystring.stringify({
-      response_type: 'code',
-      client_id: clientID,
-      scope: scope,
-      redirect_uri: redirectURI,
-      state: state
-    }));
+  res.redirect(`https://accounts.spotify.com/authorize?response_type=code&client_id=${clientID}&scope=${scope}&redirect_uri=${redirectURI}&state=${state}`);
 });
 
 app.get('/callback', function(req, res) {
