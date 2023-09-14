@@ -3,6 +3,8 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
+const querystring = require('querystring');
+
 // const helpers = require('./utils/helpers');
 
 const sequelize = require('./config/connection');
@@ -83,13 +85,21 @@ app.get('/callback', function(req, res) {
       json: true
     };
 
-    request.post(authOptions, function(error, response, body) {
-      if (!error && response.statusCode === 200) {
-        accessToken = body.access_token;
-        var accessToken = body.access_token,
-        refreshToken = body.refresh_token;
-      }});
+    // TODO: Error: req.post is not a function
+    req.post(authOptions, function (err, res, body) {
+      if (!err && res.statusCode === 200) {
+        var accessToken = body.access_token;
+        var refreshToken = body.refresh_token;
 
+        res.redirect('/#' +
+          querystring.stringify({
+            access_token: accessToken,
+            refresh_token: refreshToken
+          }));
+      } else {
+        res.send("Authentication Error.");
+      }
+    });
   }
 });
 // Example response from server
@@ -101,7 +111,6 @@ app.get('/callback', function(req, res) {
 //   "refresh_token": "NgAagA...Um_SHo"
 // }
 
-// Cont. section Request a refreshed Access Token
 // Spotify API authentication END
 
 sequelize.sync({ force: false }).then(() => {
