@@ -11,24 +11,26 @@ Playlist.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        month: {
-            type: DataTypes.STRING,
-        },
+        // month: {
+        //     type: DataTypes.STRING,
+        // },
         date_created: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW
         },
+        song_name: {
+            type: DataTypes.STRING,
+        },
+        artist_name: {
+            type: DataTypes.STRING,
+        },
+        // song_image: {
+        //     type: DataTypes.STRING,
+        // },
         user_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
-                key: 'id'
-            },
-        },
-        song_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'song',
                 key: 'id'
             },
         },

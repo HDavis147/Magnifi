@@ -24,6 +24,13 @@ router.get('/', async (req, res) => {
     // }
 });
 
+router.get('/userlogin', (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/')
+        return;
+    }
+    res.render('login')
+})
 
 
 // router.get('/:id', async (req, res) => {
