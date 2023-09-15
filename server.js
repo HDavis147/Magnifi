@@ -56,7 +56,7 @@ function generateRandomString(length) {
 
 app.get('/login', function(req, res) {
   var state = generateRandomString(16);
-  var scope = 'user-read-private%20user-read-email';
+  var scope = 'user-read-private%20user-read-email%20user-top-read';
 
   res.redirect(`https://accounts.spotify.com/authorize?response_type=code&client_id=${clientID}&scope=${scope}&redirect_uri=${redirectURI}&state=${state}`);
 });
@@ -95,6 +95,13 @@ app.get('/callback', function(req, res) {
         var refreshToken = body.refresh_token;
         console.log(accessToken);
         console.log(refreshToken);
+        res.redirect(
+          "/#" +
+            querystring.stringify({
+              client: "spotify",
+              access_token: accessToken,
+              refresh_token: refreshToken,
+            }))
 
       } else {
         res.send("Authentication Error.");

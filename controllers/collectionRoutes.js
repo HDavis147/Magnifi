@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Song, User, Comment } = require('../models');
 
+
 router.get('/', async (req, res) => {
     // I want it get the users playlist saved in our db
     // I want it to also ask at the bottom if they want to get a new listen result
