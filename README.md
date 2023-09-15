@@ -1,4 +1,4 @@
 # magnifi
 Enables users to connect over their favorite artists.
 
-![logo](./assets/images/magnifi.png)
+![logo](./public/images/magnifi.png)
