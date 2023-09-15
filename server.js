@@ -66,15 +66,13 @@ app.get('/callback', function(req, res) {
   var code = req.query.code || null;
   var state = req.query.state || null;
 
-  //console.log(code);
-  // console.log(state);
-
   if (state === null) {
     console.log("state is null");
     res.redirect('/#' +
       querystring.stringify({
         error: 'state_mismatch'
-      }));
+      })
+    );
   } else {
     var authOptions = {
       url: 'https://accounts.spotify.com/api/token',
@@ -84,16 +82,14 @@ app.get('/callback', function(req, res) {
         grant_type: 'authorization_code'
       },
       headers: {
-        'Authorization': 'Basic' + (new Buffer.from(clientID + ':' + clientSecret).toString('base64')),
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }, 
+        'Authorization' : 'Basic ' + (new Buffer.from(clientID + ':' + clientSecret).toString('base64')),
+        'Content-Type' : 'application/x-www-form-urlencoded'
+      },
       json: true
     };
 
     request.post(authOptions, function (err, response, body) {
       if (!err) {
-        console.log("posted");
-        console.log(response);
 
         var accessToken = body.access_token;
         var refreshToken = body.refresh_token;
@@ -102,9 +98,11 @@ app.get('/callback', function(req, res) {
 
       } else {
         res.send("Authentication Error.");
-        // console.log(err);
+        console.log(err);
+      }
+    })
   }
-  })}});
+});
 
 // Spotify API authentication END
 
