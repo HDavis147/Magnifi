@@ -34,6 +34,11 @@
 6. Use the user's configured `sans` font-variation-settings by default.
 */
 
+body{
+  position: relative;
+  min-height: 100vh;
+}
+
 h2{
     text-align: center;
     font-size: 200px;
@@ -67,7 +72,6 @@ h2{
   align-items: center;
   margin-top: 100px;
 }
-
 
 html {
   line-height: 1.5;

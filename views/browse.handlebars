@@ -1,0 +1,17 @@
+<section class="container">
+  <h3 class="browsePage">{{user.name}}</h3>
+  <section class="flex-row justify-center">
+    {{#each user.playlist as |playlist|}}
+    <section class="card">
+      <a href="/playlist/{{id}}">
+        <header>{{title}}</header>
+
+        <div class="card-body">
+          <img src="/images/{{userPhoto}}">
+          <p>By: {{user.name}}</p>
+        </div>
+      </a>
+    </section>
+    {{/each}}
+  </section>
+</section>
