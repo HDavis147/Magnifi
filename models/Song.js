@@ -11,32 +11,33 @@ Song.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        name: {
+        // month: {
+        //     type: DataTypes.STRING,
+        // },
+        date_created: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW
+        },
+        song_name: {
             type: DataTypes.STRING,
         },
         artist_name: {
             type: DataTypes.STRING,
         },
-        song_image: {
-            type: DataTypes.STRING,
-        },
+        // song_image: {
+        //     type: DataTypes.STRING,
+        // },
         user_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
-                key: 'id',
-            },
-        },
-        playlist_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'playlist',
                 key: 'id'
             },
-        }
+        },
     },
     {
         sequelize,
+        freezeTableName: true,
         timestamps: false,
         underscored: true,
         modelName: 'song'
