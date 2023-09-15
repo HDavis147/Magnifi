@@ -2,7 +2,7 @@ const router = require('express').Router();
 const withAuth = require('../utils/auth')
 const { Song, User } = require('../models');
 
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
     res.render('homepage')
     // try {
     //     const playlistData = await Playlist.findAll({
