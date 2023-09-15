@@ -1,9 +1,28 @@
   <Section class="userResults py-5">
         <div class="mx-auto border-green-800 bg-gray-200 border-[14px] rounded-[2.5rem] h-[454px] max-w-[341px] md:h-[682px] md:max-w-[512px]">
         <div><img class="py-5 px-4 h-30 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="Rounded avatar"></div>
+        <div class="playlist">
+            {{>playlist-details}}
+
+
+      {{!-- {{#each song as |songData|}}
+      <div class="songs col-md-4">
+        <p>
+          {{song_name}}
+        </p>
+      </div>
+      <div class="col-md-5">
+        <p>
+          {{artist_name}}
+        </p>
+      </div>
+      {{/each}} --}}
+
+        </div>
         </div>
         </div>
     </Section> 
+
 
     <section class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
       <div class="max-w-2xl mx-auto px-4">
