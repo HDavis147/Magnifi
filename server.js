@@ -3,6 +3,9 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
+const querystring = require('querystring');
+const request = require('request');
+
 // const helpers = require('./utils/helpers');
 
 const sequelize = require('./config/connection');
@@ -63,7 +66,11 @@ app.get('/callback', function(req, res) {
   var code = req.query.code || null;
   var state = req.query.state || null;
 
+  //console.log(code);
+  // console.log(state);
+
   if (state === null) {
+    console.log("state is null");
     res.redirect('/#' +
       querystring.stringify({
         error: 'state_mismatch'
@@ -73,26 +80,32 @@ app.get('/callback', function(req, res) {
       url: 'https://accounts.spotify.com/api/token',
       form: {
         code: code,
-        redirect_uri: redirectURI,
+        redirect_uri: `http://localhost:3001/callback`,
         grant_type: 'authorization_code'
       },
       headers: {
-        'Authorization': 'Basic ' + (new Buffer.from(clientID + ':' + clientSecret).toString('base64'))
-      },
+        'Authorization': 'Basic' + (new Buffer.from(clientID + ':' + clientSecret).toString('base64')),
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }, 
       json: true
     };
-  }
-});
-// Example response from server
-// {
-//   "access_token": "NgCXRK...MzYjw",
-//   "token_type": "Bearer",
-//   "scope": "user-read-private user-read-email",
-//   "expires_in": 3600,
-//   "refresh_token": "NgAagA...Um_SHo"
-// }
 
-// Cont. section Request a refreshed Access Token
+    request.post(authOptions, function (err, response, body) {
+      if (!err) {
+        console.log("posted");
+        console.log(response);
+
+        var accessToken = body.access_token;
+        var refreshToken = body.refresh_token;
+        console.log(accessToken);
+        console.log(refreshToken);
+
+      } else {
+        res.send("Authentication Error.");
+        // console.log(err);
+  }
+  })}});
+
 // Spotify API authentication END
 
 sequelize.sync({ force: false }).then(() => {
