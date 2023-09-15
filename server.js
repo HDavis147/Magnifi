@@ -3,6 +3,9 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
+const querystring = require('querystring');
+const request = require('request');
+
 // const helpers = require('./utils/helpers');
 
 const sequelize = require('./config/connection');
@@ -64,35 +67,43 @@ app.get('/callback', function(req, res) {
   var state = req.query.state || null;
 
   if (state === null) {
+    console.log("state is null");
     res.redirect('/#' +
       querystring.stringify({
         error: 'state_mismatch'
-      }));
+      })
+    );
   } else {
     var authOptions = {
       url: 'https://accounts.spotify.com/api/token',
       form: {
         code: code,
-        redirect_uri: redirectURI,
+        redirect_uri: `http://localhost:3001/callback`,
         grant_type: 'authorization_code'
       },
       headers: {
-        'Authorization': 'Basic ' + (new Buffer.from(clientID + ':' + clientSecret).toString('base64'))
+        'Authorization' : 'Basic ' + (new Buffer.from(clientID + ':' + clientSecret).toString('base64')),
+        'Content-Type' : 'application/x-www-form-urlencoded'
       },
       json: true
     };
+
+    request.post(authOptions, function (err, response, body) {
+      if (!err) {
+
+        var accessToken = body.access_token;
+        var refreshToken = body.refresh_token;
+        console.log(accessToken);
+        console.log(refreshToken);
+
+      } else {
+        res.send("Authentication Error.");
+        console.log(err);
+      }
+    })
   }
 });
-// Example response from server
-// {
-//   "access_token": "NgCXRK...MzYjw",
-//   "token_type": "Bearer",
-//   "scope": "user-read-private user-read-email",
-//   "expires_in": 3600,
-//   "refresh_token": "NgAagA...Um_SHo"
-// }
 
-// Cont. section Request a refreshed Access Token
 // Spotify API authentication END
 
 sequelize.sync({ force: false }).then(() => {
