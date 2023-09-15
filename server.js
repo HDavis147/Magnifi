@@ -84,7 +84,7 @@ app.get('/callback', function(req, res) {
         grant_type: 'authorization_code'
       },
       headers: {
-        'Authorization': 'Basic' + (new Buffer.from(clientID + ':' + clientSecret).toString('base64')),
+        'Authorization': 'Basic ' + (new Buffer.from(clientID + ':' + clientSecret).toString('base64')),
         'Content-Type': 'application/x-www-form-urlencoded'
       }, 
       json: true
