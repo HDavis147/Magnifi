@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magnifi</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" />
 </head>
@@ -14,8 +15,12 @@
     <div class="body">
         {{{body}}}
     </div>
-    
+    {{!-- {{#if logged_in}}
+    <script src="/js/logout.js"></script>
+    {{/if}} --}}
+{{!-- <script src="/js/script.js"></script> --}}
     {{>footer}}
+    <script src="/js/script.js"></script>
 </body>
 
 </html>
