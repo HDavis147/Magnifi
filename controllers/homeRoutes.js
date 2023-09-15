@@ -3,7 +3,11 @@ const withAuth = require('../utils/auth')
 const { Song, User } = require('../models');
 
 router.get('/', async (req, res) => {
+    try {
     res.render('homepage')
+    } catch (err) {
+        res.status(500).json(err)
+    }
     // try {
     //     const playlistData = await Playlist.findAll({
     //         include: [
