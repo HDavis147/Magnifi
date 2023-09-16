@@ -55,6 +55,10 @@ async function getSongsInJQuery(accessToken) {
 						json: true,
 					};
 					artistData.push(artist);
+					if (response.items[i].artists.length > 1) {
+						indexSkip = response.items[i].artists.length - 1;
+						j += indexSkip;
+					}
 				}
 			}
 			// console.log(songData);
