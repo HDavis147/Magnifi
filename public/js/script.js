@@ -1,17 +1,30 @@
 const spotifyBtn = document.querySelector('#spotify-button');
 const getSongsBtn = document.querySelector('#get-songs-button')
 
+// const splitUrl = () => {
+// 	const url = window.location.href;
+// 	const spliceUrl = url.split('=')
+// 	const refreshToken = spliceUrl[3]
+// 	const accessToken = spliceUrl[2].replace('&refresh_token', '')
+
+// 	console.log(refreshToken)
+// 	console.log(accessToken)
+// 	getSongsInJQuery(accessToken)
+
+// }
+
 const splitUrl = () => {
 	const url = window.location.href;
-	const spliceUrl = url.split('=')
-	const refreshToken = spliceUrl[3]
-	const accessToken = spliceUrl[2].replace('&refresh_token', '')
-
-	console.log(refreshToken)
-	console.log(accessToken)
-	getSongsInJQuery(accessToken)
-
-}
+	const params = new URLSearchParams(url.split('#')[1]);
+	const accessToken = params.get('access_token');
+	const refreshToken = params.get('refresh_token');
+  
+	
+	console.log(refreshToken);
+	console.log(accessToken);
+	
+	getSongsInJQuery(accessToken);
+  }
 
 const linkBtn = async (event) => {
 	event.preventDefault();
@@ -31,26 +44,43 @@ async function getSongsInJQuery(accessToken) {
 		},
 		success: function (response) {
 			console.log(response);
-			// const songData = {
-			// 	name: response,
-			// 	json: true,
-			// };
-			// console.log(songData);
-			// const artistData = {
-			// 	name: response.items.artists.name,
-			// 	json: true,
-			// };
-			// console.log(artistData);
+			console.log(response);
+			const songData = [];
+			const artistData = [];
 
-			// createPlaylist(songData, artistData);
+			for (var i = 0; i < response.items.length; i++) {
+				response.items[i].name = response.items[i].name.toUpperCase();
+				const song = {
+					name: response.items[i].name,
+					json: true,
+				};
+				songData.push(song);
+
+				for (var j = 0; j < response.items[i].artists.length; j++) {
+					response.items[i].artists[j].name = response.items[i].artists[j].name.trim();
+					response.items[i].artists[j].name = response.items[i].artists[j].name.toUpperCase();
+					if (j != response.items[i].artists.length - 1) {
+						response.items[i].artists[j].name += ", ";
+					}
+					const artist = {
+						name: response.items[i].artists[j].name,
+						json: true,
+					};
+					artistData.push(artist);
+				}
+			}
+			console.log(songData);
+			console.log(artistData);
+			// createPlaylist(artistData, songData)
 		},
 	});
 }
-async function createPlaylist(data) {
-	const songNames = data.items.name;
-	const artistNames = data.items.arist.name;
-	console.log(songs);
-	console.log(artists);
+async function createPlaylist(artistArray, songArray) {
+	// console.log(artistArray, songArray);
+	const songData = songArray
+	const artistData = artistArray
+	console.log(songData);
+	console.log(artistData);
 	// const song_name = songs
 	// const artist_name = artists
 
@@ -58,16 +88,15 @@ async function createPlaylist(data) {
 		method: 'POST',
 		body: JSON.stringify({
 			date_created: new Date().toISOString(),
-			song_name,
-			artist_name,
-			user_id,
+			song_name: songData,
+			artist_name: artistData
 		}),
 		headers: {
 			'Content-Type': 'application/json',
 		},
 	});
-
-	document.location.reload();
+	return response
+	// document.location.reload();
 }
 // event listener to listen for button click then run getSongs()
 // submitBtn.addEventListener('submit', getSongs)

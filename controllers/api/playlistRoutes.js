@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     console.log(req)
     try {
-        const playlistData = await Song.bulkCreate([
+        const playlistData = await Song.create([
             {
                 song_name: req.body,
                 artist_name: req.body

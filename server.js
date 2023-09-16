@@ -43,7 +43,7 @@ app.use(routes);
 // Spotify API authentication START
 const clientID = process.env.clientID;
 const clientSecret = process.env.clientSecret;
-const redirectURI = process.env.redirectURI;
+const redirectURI = process.env.redirectURI || "http://localhost:3001/callback";
 
 function generateRandomString(length) {
   let text = '';
@@ -78,7 +78,7 @@ app.get('/callback', function(req, res) {
       url: 'https://accounts.spotify.com/api/token',
       form: {
         code: code,
-        redirect_uri: `http://localhost:3001/callback`,
+        redirect_uri: redirectURI,
         grant_type: 'authorization_code'
       },
       headers: {
