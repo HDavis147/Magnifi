@@ -27,19 +27,14 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    console.log(req)
     try {
-        const playlistData = await Song.create([
-            {
-                song_name: req.body,
-                artist_name: req.body
-            }
-        ]);
-        res.status(200).json(playlistData);
+      const newSong = await Song.bulkCreate(req.body);
+  
+      res.status(200).json(newSong);
     } catch (err) {
-        res.status(500).json(err)
+      res.status(500).json(err);
     }
-});
+  });
 
 router.post('/:id/comments', async (req, res) => {
     try {

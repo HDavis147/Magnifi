@@ -1,17 +1,6 @@
 const spotifyBtn = document.querySelector('#spotify-button');
-const getSongsBtn = document.querySelector('#get-songs-button')
+const getSongsBtn = document.querySelector('#get-songs-button');
 
-// const splitUrl = () => {
-// 	const url = window.location.href;
-// 	const spliceUrl = url.split('=')
-// 	const refreshToken = spliceUrl[3]
-// 	const accessToken = spliceUrl[2].replace('&refresh_token', '')
-
-// 	console.log(refreshToken)
-// 	console.log(accessToken)
-// 	getSongsInJQuery(accessToken)
-
-// }
 
 const splitUrl = () => {
 	const url = window.location.href;
@@ -44,7 +33,6 @@ async function getSongsInJQuery(accessToken) {
 		},
 		success: function (response) {
 			console.log(response);
-			console.log(response);
 			const songData = [];
 			const artistData = [];
 
@@ -67,39 +55,70 @@ async function getSongsInJQuery(accessToken) {
 						json: true,
 					};
 					artistData.push(artist);
+					if (response.items[i].artists.length > 1) {
+						indexSkip = response.items[i].artists.length - 1;
+						j += indexSkip;
+					}
 				}
 			}
-			console.log(songData);
-			console.log(artistData);
-			// createPlaylist(artistData, songData)
+			// console.log(songData);
+			// console.log(artistData);
+			createPlaylist(artistData, songData)
 		},
 	});
 }
-async function createPlaylist(artistArray, songArray) {
-	// console.log(artistArray, songArray);
-	const songData = songArray
-	const artistData = artistArray
-	console.log(songData);
-	console.log(artistData);
-	// const song_name = songs
-	// const artist_name = artists
+// async function createPlaylist(artistArray, songArray) {
+// 	// console.log(artistArray, songArray);
+// 	const songData = songArray
+// 	const artistData = artistArray
+// 	console.log(songData);
+// 	console.log(artistData);
+// 	const song_name = songData
+// 	const artist_name = artistData
 
-	const response = await fetch(`/api/playlist`, {
+// 	const response = await fetch(`/api/playlist`, {
+// 		method: 'POST',
+// 		body: JSON.stringify({
+// 			date_created: new Date().toISOString(),
+// 			song_name,
+// 			artist_name,
+// 		}),
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 		},
+// 	});
+// }
+async function createPlaylist(artistArray, songArray) {
+	try {
+		const songData = songArray.map(song => song.name).join(', ');
+		const artistData = artistArray.map(artist => artist.name).join(', ');	
+  
+	  console.log(songData);
+	  console.log(artistData);
+  
+  
+	  const response = await fetch('/api/playlist', {
 		method: 'POST',
 		body: JSON.stringify({
-			date_created: new Date().toISOString(),
-			song_name: songData,
-			artist_name: artistData
+		  date_created: new Date().toISOString(),
+		  song_name: songData,
+		  artist_name: artistData,
 		}),
 		headers: {
-			'Content-Type': 'application/json',
+		  'Content-Type': 'application/json',
 		},
-	});
-	return response
-	// document.location.reload();
-}
+	  });
+  
+	  if (response.ok) {
+		document.location.replace('/collection');
+	  } else {
+		console.error('Failed to create playlist:', response.status);
+	  }
+	} catch (error) {
+	  console.error('Error creating playlist:', error);
+	}
+  }
 // event listener to listen for button click then run getSongs()
 // submitBtn.addEventListener('submit', getSongs)
-
 spotifyBtn.addEventListener('click', linkBtn);
 getSongsBtn.addEventListener('click', splitUrl)

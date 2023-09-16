@@ -2,9 +2,35 @@
         <div class="mx-auto border-green-800 bg-gray-200 border-[14px] rounded-[2.5rem] h-[454px] max-w-[341px] md:h-[682px] md:max-w-[512px]">
         <div><img class="py-5 px-4 h-30 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="Rounded avatar"></div>
         <div class="playlist">
-            {{>playlist-details}}
+            {{!-- {{>playlist-details}} --}}
 
+<section class=" playlistData">
+    <div class="card">
+        <table class="songTable-auto">
+        <thead>
+          <tr>
+            <th>Song</th>
+            <th>Artist</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Poker Face</td>
+            <td>Lady Gaga</td>
+          </tr>
+          <tr>
+            {{!-- <td>{{song_name}}</td>
+            <td>{{artist_name}}</td>
+          </tr>
+          <tr>
+            <td>{{song_name}}</td>
+            <td>{{artist_name}}</td> --}}
 
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</section>
       {{!-- {{#each song as |songData|}}
       <div class="songs col-md-4">
         <p>
@@ -35,7 +61,7 @@
             <textarea id="comment_text" name="comment_text"  rows="6"
                 class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
                 placeholder="Write a comment..." required>
-                {{comment_text}}
+                {{!-- {{comment_text}} --}}
               </textarea>
         </div>
         <button type="submit"
@@ -59,4 +85,4 @@
       </div>
         </section> --}}
 
-        <script src="/js/addComments.js"></script>
+        {{!-- <script src="/js/addComments.js"></script> --}}

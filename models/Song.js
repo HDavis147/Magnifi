@@ -11,9 +11,6 @@ Song.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        // month: {
-        //     type: DataTypes.STRING,
-        // },
         date_created: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW
@@ -24,9 +21,6 @@ Song.init(
         artist_name: {
             type: DataTypes.STRING,
         },
-        // song_image: {
-        //     type: DataTypes.STRING,
-        // },
         user_id: {
             type: DataTypes.INTEGER,
             references: {
