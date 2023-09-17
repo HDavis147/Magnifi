@@ -1,12 +1,45 @@
-  <Section class="userResults py-5">
-        <div class="mx-auto border-green-800 bg-gray-200 border-[14px] rounded-[2.5rem] h-[454px] max-w-[341px] md:h-[682px] md:max-w-[512px]">
-        <div><img class="py-5 px-4 h-30 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="Rounded avatar"></div>
-        <div class="playlist">
+    <section class="userResults py-5">
+        <div class="magazineContainer mx-auto h-[454px] max-w-[341px] md:h-[682px] md:max-w-[512px]">
+          <div class="userPhoto flex justify-end"><img class="py-10 my-4 h-30 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="Rounded avatar"></div>
+        <div class="playlist flex">
             {{!-- {{>playlist-details}} --}}
 
-<section class=" playlistData">
+<section class=" playlistSongData flex mx-auto">
     <div class="card">
-        <table class="songTable-auto">
+      {{#each playlist}}
+      {{!-- <p>{{songName}}</p> --}}
+      {{!-- {{#ifLte @index 9}}  --}}
+      {{#each songName}}
+      <li>
+      {{this}}
+      </li>
+      {{/each}}
+      {{!-- {{/ifLte}}  --}}
+      {{/each}}
+    </div>
+</section>
+
+<section class=" playlistArtist Data flex mx-auto">
+    <div class="card">
+      {{#each playlist}}
+      {{!-- <p>{{songName}}</p> --}}
+      {{!-- {{#ifLte @index 9}}  --}}
+      {{#each songArtist}}
+      <li>
+      {{this}}
+      </li>
+      {{/each}}
+      {{!-- {{/ifLte}}  --}}
+      {{/each}}
+    </div>
+</section>
+
+      {{!-- {{#each playlist}}
+        <p>{{songName}}</p>
+              {{/each}} --}}
+        {{!-- <p>{{this.songArtist}}</p> --}}
+
+        {{!-- <table class="songTable-auto">
         <thead>
           <tr>
             <th>Song</th>
@@ -16,19 +49,20 @@
         <tbody>
           <tr>
             <td>Poker Face</td>
-            <td>Lady Gaga</td>
+            <td>{{song_name}}</td>
           </tr>
-          <tr>
+          <tr> --}}
             {{!-- <td>{{song_name}}</td>
             <td>{{artist_name}}</td>
           </tr>
           <tr>
             <td>{{song_name}}</td>
             <td>{{artist_name}}</td> --}}
-
+{{!-- 
           </tr>
         </tbody>
-      </table>
+      </table> --}}
+
     </div>
 </section>
       {{!-- {{#each song as |songData|}}
@@ -47,7 +81,7 @@
         </div>
         </div>
         </div>
-    </Section> 
+    </section> 
 
 
 <section class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
