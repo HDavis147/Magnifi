@@ -16,11 +16,11 @@ router.get('/collection', async (req, res) => {
       const songs = await Song.findAll();
   
       const playlist = songs.map((song) => ({
-        songName: song.song_name.split(','),
-        songArtist: song.artist_name.split(','),
+        song_name: song.song_name.split(','),
+        song_artist: song.artist_name.split(','),
       }));
-  
-      res.render('userRoutes', { playlist });
+      console.log(playlist)
+      res.render('playlist', { playlist });
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -31,7 +31,7 @@ router.get('/collection', async (req, res) => {
   router.get('/collection/:id', async (req, res) => {
     try {
         const playlistData = await Song.findByPk(req.params.id);
-        const playlist = playlistData.get({ plain: true });
+        const playlist = playlistData.get({ plain: false });
         console.log(playlist)
         res.render('playlist', {playlist})
     } catch (err) {

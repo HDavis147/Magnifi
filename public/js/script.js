@@ -38,21 +38,16 @@ async function getSongsInJQuery(accessToken) {
 
 			for (var i = 0; i < response.items.length; i++) {
 				response.items[i].name = response.items[i].name.toUpperCase();
-				const song = {
-					name: response.items[i].name,
-					json: true,
-				};
+				const song = [response.items[i].name]
 				songData.push(song);
+			
+				
 
 				for (var j = 0; j < response.items[i].artists.length; j++) {
-					response.items[i].artists[j].name = response.items[i].artists[j].name.trim();
 					response.items[i].artists[j].name = response.items[i].artists[j].name.toUpperCase();
-					if (j != response.items[i].artists.length - 1) {
-						response.items[i].artists[j].name += ", ";
-					}
+					
 					const artist = {
-						name: response.items[i].artists[j].name,
-						json: true,
+						name: response.items[i].artists[j].name
 					};
 					artistData.push(artist);
 					if (response.items[i].artists.length > 1) {
@@ -61,9 +56,9 @@ async function getSongsInJQuery(accessToken) {
 					}
 				}
 			}
-			// console.log(songData);
-			// console.log(artistData);
-			createPlaylist(artistData, songData)
+			console.log(songData);
+			console.log(artistData);
+			createPlaylist(artistData, songData);
 		},
 	});
 }
@@ -90,8 +85,8 @@ async function getSongsInJQuery(accessToken) {
 // }
 async function createPlaylist(artistArray, songArray) {
 	try {
-		const songData = songArray.map(song => song.name).join(', ');
-		const artistData = artistArray.map(artist => artist.name).join(', ');	
+		const songData = songArray.map(song => song.name).join(' ');
+		const artistData = artistArray.map(artist => artist.name).join();	
   
 	  console.log(songData);
 	  console.log(artistData);
@@ -110,10 +105,7 @@ async function createPlaylist(artistArray, songArray) {
 	  });
   
 	  if (response.ok) {
-		const playlist = await response.json();
-		const playlistId = playlist.id;
-		document.location.replace(`/collection/${playlistId}`);
-
+		document.location.replace('/collection');
 	  } else {
 		console.error('Failed to create playlist:', response.status);
 	  }
@@ -125,3 +117,8 @@ async function createPlaylist(artistArray, songArray) {
 // submitBtn.addEventListener('submit', getSongs)
 spotifyBtn.addEventListener('click', linkBtn);
 getSongsBtn.addEventListener('click', splitUrl)
+
+
+
+
+
