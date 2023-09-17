@@ -26,7 +26,7 @@ return changeUrl
 async function getSongsInJQuery(accessToken) {
 	await $.ajax({
 		method: 'GET',
-		url: 'https://api.spotify.com/v1/me/top/tracks',
+		url: 'https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10',
 
 		headers: {
 			Authorization: 'Bearer ' + accessToken,
@@ -38,7 +38,7 @@ async function getSongsInJQuery(accessToken) {
 
 			for (var i = 0; i < response.items.length; i++) {
 				response.items[i].name = response.items[i].name.toUpperCase();
-				const song = [response.items[i].name]
+				const song = response.items[i].name
 				songData.push(song);
 			
 				
@@ -46,9 +46,8 @@ async function getSongsInJQuery(accessToken) {
 				for (var j = 0; j < response.items[i].artists.length; j++) {
 					response.items[i].artists[j].name = response.items[i].artists[j].name.toUpperCase();
 					
-					const artist = {
-						name: response.items[i].artists[j].name
-					};
+					const artist = response.items[i].artists[j].name
+					
 					artistData.push(artist);
 					if (response.items[i].artists.length > 1) {
 						indexSkip = response.items[i].artists.length - 1;
@@ -62,37 +61,16 @@ async function getSongsInJQuery(accessToken) {
 		},
 	});
 }
-// async function createPlaylist(artistArray, songArray) {
-// 	// console.log(artistArray, songArray);
-// 	const songData = songArray
-// 	const artistData = artistArray
-// 	console.log(songData);
-// 	console.log(artistData);
-// 	const song_name = songData
-// 	const artist_name = artistData
-
-// 	const response = await fetch(`/api/playlist`, {
-// 		method: 'POST',
-// 		body: JSON.stringify({
-// 			date_created: new Date().toISOString(),
-// 			song_name,
-// 			artist_name,
-// 		}),
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 		},
-// 	});
-// }
 async function createPlaylist(artistArray, songArray) {
 	try {
-		const songData = songArray.map(song => song.name).join(' ');
-		const artistData = artistArray.map(artist => artist.name).join();	
+		const songData = songArray.join(', ');
+		const artistData = artistArray.join(', ');	
   
 	  console.log(songData);
 	  console.log(artistData);
   
   
-	  const response = await fetch('/api/playlist', {
+	  const response = await fetch('/api/playlist/', {
 		method: 'POST',
 		body: JSON.stringify({
 		  date_created: new Date().toISOString(),
@@ -112,7 +90,7 @@ async function createPlaylist(artistArray, songArray) {
 	} catch (error) {
 	  console.error('Error creating playlist:', error);
 	}
-  }
+}
 // event listener to listen for button click then run getSongs()
 // submitBtn.addEventListener('submit', getSongs)
 spotifyBtn.addEventListener('click', linkBtn);

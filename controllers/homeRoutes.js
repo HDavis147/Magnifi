@@ -11,27 +11,31 @@ router.get('/', async (req, res) => {
 });
 
 
-router.get('/collection', async (req, res) => {
-    try {
-      const songs = await Song.findAll();
-  
-      const playlist = songs.map((song) => ({
-        song_name: song.song_name.split(','),
-        song_artist: song.artist_name.split(','),
-      }));
-      console.log(playlist)
-      res.render('playlist', { playlist });
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Internal Server Error');
-    }
-  });
 
+router.get('/collection', async (req, res) => {
+  try {
+    const songs = await Song.findAll();
+
+    const playlist = songs.map((song) => ({
+      song_names: song.song_name ? song.song_name.split(', ') : [],
+      song_artist: song.artist_name ? song.song_name.split(', ') : [],
+    }));
+
+    console.log(playlist);
+    res.render('playlist', { playlist });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
   router.get('/collection/:id', async (req, res) => {
     try {
         const playlistData = await Song.findByPk(req.params.id);
-        const playlist = playlistData.get({ plain: false });
+        const playlist = playlistData.map((song) => ({
+          song_names: song.song_name ? song.song_name.split(', ') : [],
+          song_artist: song.artist_name ? song.song_name.split(', ') : [],
+        }));
         console.log(playlist)
         res.render('playlist', {playlist})
     } catch (err) {
