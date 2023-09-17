@@ -19,7 +19,7 @@ router.get('/collection', async (req, res) => {
     const songs = await Song.findAll();
 
     const playlist = songs.map((song) => ({
-      song_names: song.song_name ? song.song_name.split(', ') : [],
+      song_name: song.song_name ? song.song_name.split(', ') : [],
       song_artist: song.artist_name ? song.song_name.split(', ') : [],
     }));
 
@@ -33,11 +33,14 @@ router.get('/collection', async (req, res) => {
 
   router.get('/collection/:id', async (req, res) => {
     try {
-        const playlistData = await Song.findByPk(req.params.id);
-        const playlist = playlistData.map((song) => ({
-          song_names: song.song_name ? song.song_name.split(', ') : [],
-          song_artist: song.artist_name ? song.song_name.split(', ') : [],
-        }));
+      const playlistData = await Song.findByPk(req.params.id);
+      const playlist = {
+        id: playlistData.id,
+        date_created: playlistData.date_created,
+        song_name: playlistData.song_name ? playlistData.song_name.split(', ') : [],
+        song_artist: playlistData.artist_name ? playlistData.artist_name.split(', ') : [],
+        user_id: playlistData.user_id
+      }
         console.log(playlist)
         res.render('playlist', {playlist})
     } catch (err) {

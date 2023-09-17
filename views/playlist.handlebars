@@ -33,6 +33,20 @@
       {{/each}}
     </div>
 </section>
+
+<h2>Songs:</h2>
+<ul>
+  {{#each playlist.song_name}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
+
+<h2>Artists:</h2>
+<ul>
+  {{#each playlist.song_artist}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
       {{!-- {{#each playlist}}
         <p>{{songName}}</p>
               {{/each}} --}}

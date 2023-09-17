@@ -83,7 +83,9 @@ async function createPlaylist(artistArray, songArray) {
 	  });
   
 	  if (response.ok) {
-		document.location.replace('/collection');
+		const playlist = await response.json();
+		const playlistId = playlist.id;
+		window.location.replace(`/collection/${playlistId}`);
 	  } else {
 		console.error('Failed to create playlist:', response.status);
 	  }
