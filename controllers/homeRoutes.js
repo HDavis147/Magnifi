@@ -8,45 +8,42 @@ router.get('/', async (req, res) => {
     } catch (err) {
         res.status(500).json(err)
     }
-    // try {
-    //     const playlistData = await Playlist.findAll({
-    //         include: [
-    //             {
-    //                 model: User,
-    //                 attributes: ['name']
-    //             }
-    //         ]
-    //     });
-
-    //     collection = playlistData.map((playlist) => (playlist).get({ plain: true }));
-
-    //     res.render('homepage', {
-    //         collection,
-    //         logged_in: req.session.logged_in
-    //     });
-    // } catch (err) {
-    //     res.status(500).json(err)
-    // }
 });
 
+
+
 router.get('/collection', async (req, res) => {
-    // I want to create the new listen history to this route
-    // try {
-    //     res.render('playlist')
-    //     } catch (err) {
-    //         res.status(500).json(err)
-    //     }
+  try {
+    const songs = await Song.findAll();
+
+    const playlist = songs.map((song) => ({
+      song_names: song.song_name ? song.song_name.split(', ') : [],
+      song_artist: song.artist_name ? song.song_name.split(', ') : [],
+    }));
+
+    console.log(playlist);
+    res.render('playlist', { playlist });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+  router.get('/collection/:id', async (req, res) => {
     try {
-        const playlistData = await Song.findAll({ include: User })
-        const playlist = playlistData.map((song) => song.get({ plain: true }))
-        res.render('playlist', {
-            playlist,
-        })
+        const playlistData = await Song.findByPk(req.params.id);
+        const playlist = playlistData.map((song) => ({
+          song_names: song.song_name ? song.song_name.split(', ') : [],
+          song_artist: song.artist_name ? song.song_name.split(', ') : [],
+        }));
+        console.log(playlist)
+        res.render('playlist', {playlist})
     } catch (err) {
         res.status(500).json(err)
     }
+  });
 
-});
+    
 
 router.get('/userlogin', (req, res) => {
     if (req.session.logged_in) {

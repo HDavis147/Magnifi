@@ -1,6 +1,10 @@
-<section class=" playlistData">
+{{!-- <section class=" playlistData">
     <div class="card">
-        <table class="songTable-auto">
+
+      {{#each songName}}
+      <p>{{this}}</p>
+      {{/each}} --}}
+        {{!-- <table class="songTable-auto">
         <thead>
           <tr>
             <th>Song</th>
@@ -12,16 +16,21 @@
             <td>Poker Face</td>
             <td>Lady Gaga</td>
           </tr>
-          <tr>
+          <tr> --}}
             {{!-- <td>{{song_name}}</td>
             <td>{{artist_name}}</td>
           </tr>
           <tr>
             <td>{{song_name}}</td>
             <td>{{artist_name}}</td> --}}
+    {{!-- </div>
+</section> --}}
 
-          </tr>
-        </tbody>
-      </table>
-    </div>
-</section>
+
+<div>
+  <ul class="song_list">
+  {{#each song_name}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
+</div>
