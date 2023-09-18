@@ -1,12 +1,9 @@
 const router = require('express').Router();
 const apiRoutes = require('./api');
 const homeRoutes = require('./homeRoutes');
-// const collectionRoutes = require('./collectionRoutes')
 
+//creating the routes used for the root route and also the /api route
 router.use('/api', apiRoutes);
 router.use('/', homeRoutes);
-// router.use('/collection', collectionRoutes)
-
-
 
 module.exports = router;
