@@ -21,4 +21,4 @@
 ## Contact
   You can contact me through:
   Email: [n/a](mailto:n/a)
-  GitHub: [SHAFFA](https://github.com/shaffachaudhry, [HOUSTON](https://github.com/HDavis147), [JOSH](https://github.com/JoshON5)
+  GitHub: [SHAFFA](https://github.com/shaffachaudhry), [HOUSTON](https://github.com/HDavis147), [JOSH](https://github.com/JoshON5)
