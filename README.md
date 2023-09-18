@@ -16,6 +16,8 @@ Heroku: https://magnifi-6c0024370b61.herokuapp.com/
 - [Contact](#contact)
  
 ## Description
+  <img src="./public/images/2023-09-18 18.36.05.gif">
+  
   To have a user get a snapshot of their Spotify listen for the past 4 weeks and keep track throughout the year while also having posted to a whole collection for other users to browse and get suggestions from.
 
 ## Installation

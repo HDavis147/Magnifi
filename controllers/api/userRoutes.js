@@ -1,5 +1,14 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+// Route to get users
+router.get('/', async (req, res) => {
+	try {
+		const userData = await User.findAll()
+		res.status(200).json(userData)
+	} catch (err) {
+		res.status(200).json(userData);
+	}
+});
 
 // Route to create a new user
 router.post('/', async (req, res) => {
@@ -73,5 +82,21 @@ router.post('/logout', (req, res) => {
 		res.status(404).end();
 	}
 });
-
+// Route to delete user
+router.delete('/:id', async (req, res) => {
+	try {
+		const userData = await User.destroy({
+			where: {
+				id: req.params.id,
+			}
+		});
+		if (!userData) {
+			res.status(404).json({ message: 'User not found.' });
+			return
+		}
+		res.status(200).json(userData)
+	} catch (err) {
+		res.status(500).json(err)
+	}
+});
 module.exports = router;
