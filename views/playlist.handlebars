@@ -1,20 +1,31 @@
     <section class="userResults py-5">
         <div class="magazineContainer mx-auto h-[454px] max-w-[341px] md:h-[682px] md:max-w-[512px]">
-          <div class="userPhoto flex justify-end"><img class="py-10 my-4 h-30 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="Rounded avatar"></div>
-        <div class="playlist flex">
-            {{!-- {{>playlist-details}} --}}
+          {{!-- <div class="userPhoto flex justify-end"><img class="py-10 my-4 h-30 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="Rounded avatar"></div> --}}
+                <div class=" text-sm italic flex-end px-6 pt-2">
+            <p>page: {{playlistData.user_id}}</p>
+              </div>
+              <div class="flex items-center justify-center text-lg font-semibold pt-8">
+                  <p>Playlist by: {{playlistData.user.name}}</p>
+              </div>
+              <div class="playlist flex pt-18 px-14 mt-5">
+                {{>playlist-details}} 
+              </div>
+      </section>
 
-<section class=" playlistSongData flex mx-auto">
+<div class="flex justify-center items-center m-5">
+  <a href="/collection" class="inline-flex items-center justify-center text-base font-medium text-gray-900 bg-lime-500 hover:bg-gray-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-lime-300 px-5 py-2.5 text-center mr-2 mb-2">
+    <span class="w-full">Browse Magnifi!</span>
+  </a> 
+</div>
+
+{{!-- <section class=" playlistSongData flex mx-auto">
     <div class="card">
       {{#each playlist}}
-      {{!-- <p>{{songName}}</p> --}}
-      {{!-- {{#ifLte @index 9}}  --}}
       {{#each song_name}}
       <li>
       {{this}}
       </li>
       {{/each}}
-      {{!-- {{/ifLte}}  --}}
       {{/each}}
     </div>
 </section>
@@ -22,114 +33,19 @@
 <section class=" playlistArtist Data flex mx-auto">
     <div class="card">
       {{#each playlist}}
-      {{!-- <p>{{songName}}</p> --}}
-      {{!-- {{#ifLte @index 9}}  --}}
       {{#each song_artist}}
       <li>
       {{this}}
       </li>
       {{/each}}
-      {{!-- {{/ifLte}}  --}}
       {{/each}}
     </div>
-</section>
+</section> --}}
 
-<h2>Songs:</h2>
+{{!-- <h2>Songs:</h2>
 <ul>
   {{#each playlist.song_name}}
     <li>{{this}}</li>
   {{/each}}
 </ul>
-
-<h2>Artists:</h2>
-<ul>
-  {{#each playlist.song_artist}}
-    <li>{{this}}</li>
-  {{/each}}
-</ul>
-      {{!-- {{#each playlist}}
-        <p>{{songName}}</p>
-              {{/each}} --}}
-        {{!-- <p>{{this.songArtist}}</p> --}}
-
-        {{!-- <table class="songTable-auto">
-        <thead>
-          <tr>
-            <th>Song</th>
-            <th>Artist</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Poker Face</td>
-            <td>{{song_name}}</td>
-          </tr>
-          <tr> --}}
-            {{!-- <td>{{song_name}}</td>
-            <td>{{artist_name}}</td>
-          </tr>
-          <tr>
-            <td>{{song_name}}</td>
-            <td>{{artist_name}}</td> --}}
-{{!-- 
-          </tr>
-        </tbody>
-      </table> --}}
-
-    </div>
-</section>
-      {{!-- {{#each song as |songData|}}
-      <div class="songs col-md-4">
-        <p>
-          {{song_name}}
-        </p>
-      </div>
-      <div class="col-md-5">
-        <p>
-          {{artist_name}}
-        </p>
-      </div>
-      {{/each}} --}}
-
-        </div>
-        </div>
-        </div>
-    </section> 
-
-
-<section class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
-  <div class="max-w-2xl mx-auto px-4">
-      <div class="flex justify-between items-center mb-6">
-        <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Comments</h2>
-    </div>
-    <form class=" new-comment-form mb-6">
-        <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-            <label for="comment" class="sr-only">Your comment</label>
-            <textarea id="comment_text" name="comment_text"  rows="6"
-                class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-                placeholder="Write a comment..." required>
-                {{!-- {{comment_text}} --}}
-              </textarea>
-        </div>
-        <button type="submit"
-            class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-green-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-            Post comment
-        </button>
-    </form>
-</section>
-
-
-
-        {{!-- <div class="border rounded-md p-3 ml-3 my-3">
-          <div class="flex gap-3 items-center">
-              <h3 class="font-bold">
-                  User name
-              </h3>
-          </div>
-          <p class="text-gray-600 mt-2">
-              this is sample comment
-          </p>
-      </div>
-        </section> --}}
-
-        {{!-- <script src="/js/addComments.js"></script> --}}
+{{!-- {{playlist.user_id}} --}}

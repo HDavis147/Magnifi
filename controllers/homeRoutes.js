@@ -12,43 +12,44 @@ router.get('/', withAuth, async (req, res) => {
 });
 router.get('/collection', withAuth, async (req, res) => {
   try {
-    const songs = await Song.findAll();
+    const songs = await Song.findAll({
+      include: {
+        model: User,
+        attributes: ['id', 'name', 'email']
+      }
+    });
     const playlist = songs.map((song) => ({
+      ...song.get({ plain: true }),
       song_name: song.song_name ? song.song_name.split(', ') : [],
-      song_artist: song.artist_name ? song.song_name.split(', ') : [],
+      song_artist: song.artist_name ? song.artist_name.split(', ') : []
     }));
     console.log(playlist);
-    res.render('playlist', { playlist });
+    res.render('collection', { playlist });
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
   }
-});
-  router.get('/collection/:id', withAuth, async (req, res) => {
-    try {
-      const playlistData = await Song.findByPk(req.params.id, {
-        include: {
-          model: User,
-          attributes: [
-            'id',
-            'name',
-            'email'
-          ]
-        }
-      });
-      const playlist = {
-        id: playlistData.id,
-        date_created: playlistData.date_created,
-        song_name: playlistData.song_name ? playlistData.song_name.split(', ') : [],
-        song_artist: playlistData.artist_name ? playlistData.artist_name.split(', ') : [],
-        user_id: req.session.user_id
+})
+router.get('/collection/:id', withAuth, async (req, res) => {
+  try {
+    const songData = await Song.findByPk(req.params.id, {
+      include: {
+        model: User,
+        attributes: ['id', 'name', 'email']
       }
-        console.log(playlist)
-        res.render('playlist', { playlist })
-    } catch (err) {
-        res.status(500).json(err)
-    }
-  });
+    });
+    
+    const playlistData = {
+      ...songData.get({ plain: true }),
+      song_name: songData.song_name ? songData.song_name.split(', ') : [],
+      song_artist: songData.artist_name ? songData.artist_name.split(', ') : []
+    };
+    console.log(playlistData)
+    res.render('playlist', { playlistData });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
     
 router.get('/userlogin', (req, res) => {
     if (req.session.logged_in) {
