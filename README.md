@@ -1,7 +1,19 @@
-![logo](./public/images/magnifi.png)
+![logo](./public/images/magnifi1.png)
 # Magnifi
  
 [![License Badge](https://img.shields.io/badge/License-MIT-purple)](https://mit-license.org)
+
+## Heroku Link
+Heroku: https://magnifi-6c0024370b61.herokuapp.com/
+
+## Table of Contents
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Mock](#mock)
+- [Credits](#credits)
+- [License](#license)
+- [Contact](#contact)
  
 ## Description
   To have a user get a snapshot of their Spotify listen for the past 4 weeks and keep track throughout the year while also having posted to a whole collection for other users to browse and get suggestions from.
@@ -12,6 +24,8 @@
 ## Usage
   to use the application a user must first create a profile on our site then they will be able to browse the playlists created or link their spotify to start getting a closer look into their song listening history for the past month. 
 
+## Mock
+
 ## Credits
   Shaffa Chaudhry, Houston Davis, and Joshua Nichols 
 
@@ -21,4 +35,4 @@
 ## Contact
   You can contact me through:
   Email: [n/a](mailto:n/a)
-  GitHub: [SHAFFA](https://github.com/shaffachaudhry, [HOUSTON](https://github.com/HDavis147), [JOSH](https://github.com/JoshON5)
+  GitHub: [SHAFFA](https://github.com/shaffachaudhry), [HOUSTON](https://github.com/HDavis147), [JOSH](https://github.com/JoshON5)
