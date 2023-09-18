@@ -1,36 +1,22 @@
-{{!-- <section class=" playlistData">
-    <div class="card">
-
-      {{#each songName}}
-      <p>{{this}}</p>
-      {{/each}} --}}
-        {{!-- <table class="songTable-auto">
-        <thead>
-          <tr>
-            <th>Song</th>
-            <th>Artist</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Poker Face</td>
-            <td>Lady Gaga</td>
-          </tr>
-          <tr> --}}
-            {{!-- <td>{{song_name}}</td>
-            <td>{{artist_name}}</td>
-          </tr>
-          <tr>
-            <td>{{song_name}}</td>
-            <td>{{artist_name}}</td> --}}
-    {{!-- </div>
-</section> --}}
-
 
 <div>
-  <ul class="song_list">
-  {{#each song_name}}
+  <h2 class="text-4xl font-semibold text-gray-900 underline pb-5">Songs:</h2>
+  <div class="">
+    <ul>
+  {{#each playlistData.song_name}}
     <li>{{this}}</li>
   {{/each}}
-</ul>
+    </ul>
+  </div>
+</div>
+
+<div>
+  <h2 class="text-4xl font-semibold text-gray-900 underline pb-5">Artists:</h2>
+  <div>
+    <ul>
+  {{#each playlistData.song_artist}}
+    <li>{{this}}</li>
+  {{/each}}
+    </ul>
+  </div>
 </div>
